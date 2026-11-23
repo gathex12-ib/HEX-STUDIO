@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <title>HEX-STUDIO — CENTRAL-HEX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">H</span><span>HEX-STUDIO<small>BY CENTRAL-HEX</small></span></a>
+    <div class="side-label">ESPACE CRÉATIF</div>
+    <button class="nav active" data-view="home">⌂ <span>Accueil</span></button>
+    <button class="nav" data-view="video">▣ <span>Studio vidéo</span></button>
+    <button class="nav" data-view="image">▧ <span>Studio image</span></button>
+    <button class="nav" data-view="design">✳ <span>Design</span></button>
+    <button class="nav" data-view="audio">♫ <span>Studio audio</span></button>
+    <div class="side-bottom"><span class="status-dot"></span> Mode invité <button id="accountBtn">Connexion</button></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar"><div><span class="eyebrow">CENTRAL-HEX CREATIVE SUITE</span><h1 id="pageTitle">Votre espace créatif.</h1></div><div class="top-actions"><span class="cloud-state">● Stockage local</span><button class="btn btn-ghost" id="newProjectBtn">＋ Nouveau projet</button></div></header>
+
+    <section class="view active" id="home">
+      <div class="hero"><div><span class="eyebrow">CRÉEZ. MODIFIEZ. EXPRIMEZ.</span><h2>Tout commence<br>par une idée.</h2><p>Un espace unique pour vos créations vidéo, image, audio et design.</p><button class="btn btn-light" data-go="video">Ouvrir le studio vidéo <span>→</span></button></div><div class="hero-orb"><div class="orb-inner">HEX</div></div></div>
+      <div class="section-head"><div><span class="eyebrow">VOTRE BOÎTE À OUTILS</span><h2>Choisir un studio</h2></div></div>
+      <div class="studio-grid">
+        <button class="studio-card" data-go="video"><span class="card-icon">▣</span><b>HEX-VIDEO</b><small>Montage multipiste, découpage et export local</small><span class="card-arrow">↗</span></button>
+        <button class="studio-card" data-go="image"><span class="card-icon">▧</span><b>HEX-IMAGE</b><small>Filtres, recadrage et export d'image</small><span class="card-arrow">↗</span></button>
+        <button class="studio-card" data-go="design"><span class="card-icon">✳</span><b>HEX-DESIGN</b><small>Créer des affiches et visuels</small><span class="card-arrow">↗</span></button>
+        <button class="studio-card" data-go="audio"><span class="card-icon">♫</span><b>HEX-AUDIO</b><small>Écouter et préparer vos fichiers audio</small><span class="card-arrow">↗</span></button>
+      </div>
+      <div class="section-head"><div><span class="eyebrow">PROJETS</span><h2>Récemment utilisés</h2></div><button class="text-btn" id="exportProjects">Exporter mes projets ↗</button></div>
+      <div class="project-list" id="projectList"><div class="empty-state">Aucun projet pour le moment. Lancez votre première création.</div></div>
+    </section>
+
+    <section class="view" id="video">
+      <div class="editor-topline">
+        <div><span class="eyebrow">HEX-VIDEO / NON-LINEAR EDITOR</span><h2>Montage vidéo</h2><p class="muted">Montez plusieurs médias sur une timeline multipiste. Vos fichiers restent sur cet appareil.</p></div>
+        <div class="editor-actions">
+          <label class="btn btn-light file-label">＋ Importer des médias<input id="mediaInput" type="file" accept="video/*,audio/*" multiple></label>
+          <button class="btn btn-accent" id="exportVideo">Exporter la vidéo ↗</button>
+        </div>
+      </div>
+      <div class="editor-shell">
+        <div class="preview-column">
+          <div class="preview-stage editor-preview">
+            <canvas id="editorCanvas" width="1280" height="720"></canvas>
+            <div class="placeholder" id="editorPlaceholder"><span>▣</span><b>Votre moniteur de montage</b><small>Importez des vidéos ou des sons pour commencer</small></div>
+          </div>
+          <div class="transport">
+            <div class="transport-left">
+              <button class="icon-btn" id="toStart" title="Début">|◀</button>
+              <button class="play-btn" id="playTimeline" title="Lecture">▶</button>
+              <button class="icon-btn" id="toEnd" title="Fin">▶|</button>
+              <button class="icon-btn" id="splitClip" title="Séparer au curseur">✂ Séparer</button>
+              <button class="icon-btn danger-text" id="deleteClip" title="Supprimer le clip">Supprimer</button>
+            </div>
+            <div class="time-readout"><span id="currentTime">00:00.00</span><i>/</i><span id="totalTime">00:00.00</span></div>
+          </div>
+          <div class="timeline-toolbar">
+            <div><b>Timeline</b><span class="muted" id="clipCount">0 clip</span></div>
+            <label class="zoom-control">Zoom <input id="timelineZoom" type="range" min="30" max="140" value="70"></label>
+          </div>
+          <div class="timeline-scroll" id="timelineScroll">
+            <div class="timeline-ruler" id="timelineRuler"><div class="ruler-label">TEMPS</div><div class="ruler-scale" id="rulerScale"></div></div>
+            <div class="track-row" data-track="0"><div class="track-name"><b>V2</b><small>Vidéo 2</small></div><div class="track-lane"></div></div>
+            <div class="track-row" data-track="1"><div class="track-name"><b>V1</b><small>Vidéo 1</small></div><div class="track-lane"></div></div>
+            <div class="track-row" data-track="2"><div class="track-name audio-track-name"><b>A1</b><small>Audio 1</small></div><div class="track-lane"></div></div>
+            <div class="track-row" data-track="3"><div class="track-name audio-track-name"><b>A2</b><small>Audio 2</small></div><div class="track-lane"></div></div>
+            <div class="playhead" id="playhead"><span></span></div>
+          </div>
+          <div class="timeline-help">Glissez un clip pour le déplacer · Cliquez sur un clip pour le sélectionner · Cliquez sur la règle pour déplacer le curseur</div>
+        </div>
+        <aside class="editor-inspector">
+          <div class="inspector-heading"><span class="eyebrow">INSPECTEUR</span><h3>Propriétés du clip</h3></div>
+          <div id="noClip" class="inspector-empty">Sélectionnez un clip dans la timeline pour modifier ses paramètres.</div>
+          <div id="clipProperties" hidden>
+            <div class="selected-file"><span class="selected-file-icon">▣</span><div><b id="selectedName">Clip</b><small id="selectedType">Vidéo</small></div></div>
+            <label>Position sur la timeline (s)<input id="clipPosition" type="number" min="0" step="0.1"></label>
+            <label>Début source (s)<input id="clipIn" type="number" min="0" step="0.1"></label>
+            <label>Fin source (s)<input id="clipOut" type="number" min="0" step="0.1"></label>
+            <label>Piste<select id="clipTrack"><option value="0">V2 — Vidéo 2</option><option value="1">V1 — Vidéo 1</option><option value="2">A1 — Audio 1</option><option value="3">A2 — Audio 2</option></select></label>
+            <div class="inspector-duration">Durée du clip <b id="clipDuration">0.0 s</b></div>
+            <button class="btn btn-outline full" id="duplicateClip">Dupliquer le clip</button>
+          </div>
+          <div class="inspector-divider"></div>
+          <div class="inspector-heading"><span class="eyebrow">MÉDIATHÈQUE</span><h3>Médias importés</h3></div>
+          <div id="mediaBin" class="media-bin"><p class="muted">Aucun média importé.</p></div>
+          <div class="export-note"><b>Export local</b><p>Le rendu est effectué dans votre navigateur. Le format disponible dépend des codecs pris en charge par votre appareil.</p></div>
+        </aside>
+      </div>
+      <div class="export-progress" id="exportProgress" hidden><div><b id="exportLabel">Préparation de l'export…</b><span id="exportPercent">0%</span></div><div class="progress-track"><span id="exportBar"></span></div></div>
+      <div id="mediaElements" hidden></div>
+    </section>
+
+    <section class="view" id="image">
+      <div class="panel-head"><div><span class="eyebrow">HEX-IMAGE</span><h2>Studio image</h2></div><label class="btn btn-light file-label">Importer une image<input id="imageInput" type="file" accept="image/*"></label></div>
+      <div class="image-workspace"><div class="image-stage"><img id="imagePreview" alt="Aperçu de l'image"><div class="placeholder" id="imagePlaceholder"><span>▧</span><b>Votre espace image</b><small>Importez une image pour la modifier</small></div></div><aside class="properties"><h3>Ajustements</h3><label>Luminosité <output id="brightOut">100%</output><input id="brightness" type="range" min="40" max="180" value="100"></label><label>Contraste <output id="contrastOut">100%</output><input id="contrast" type="range" min="40" max="180" value="100"></label><label>Saturation <output id="saturateOut">100%</output><input id="saturate" type="range" min="0" max="200" value="100"></label><button class="btn btn-light full" id="downloadImage">Exporter en PNG</button><button class="btn btn-outline full" id="resetImage">Réinitialiser</button></aside></div>
+    </section>
+
+    <section class="view" id="design">
+      <div class="panel-head"><div><span class="eyebrow">HEX-DESIGN</span><h2>Atelier graphique</h2></div><button class="btn btn-light" id="downloadPoster">Exporter l'affiche PNG</button></div>
+      <div class="design-layout"><div class="poster-controls properties"><h3>Votre composition</h3><label>Titre<input id="posterTitle" value="YOUR NEXT BIG IDEA"></label><label>Sous-titre<input id="posterSubtitle" value="Créativité sans limites."></label><label>Couleur de fond<input id="posterColor" type="color" value="#111111"></label><label>Couleur du texte<input id="posterTextColor" type="color" value="#ffffff"></label><label>Format<select id="posterFormat"><option value="1080,1080">Carré — 1080 × 1080</option><option value="1080,1350">Portrait — 1080 × 1350</option><option value="1920,1080">Paysage — 1920 × 1080</option></select></label></div><div class="poster-wrap"><canvas id="posterCanvas" width="1080" height="1080"></canvas></div></div>
+    </section>
+
+    <section class="view" id="audio">
+      <div class="panel-head"><div><span class="eyebrow">HEX-AUDIO</span><h2>Studio audio</h2></div><label class="btn btn-light file-label">Importer un audio<input id="audioInput" type="file" accept="audio/*"></label></div>
+      <div class="audio-card"><div class="audio-art">♫</div><div class="audio-content"><h3 id="audioName">Aucun fichier sélectionné</h3><p class="muted">Lecture locale de vos fichiers audio</p><audio id="audioPreview" controls></audio></div></div>
+      <p class="hint">L'audio reste sur votre appareil dans cette version. Le découpage, le mixage et les effets seront intégrés dans une prochaine étape.</p>
+    </section>
+    <footer>HEX-STUDIO <span>•</span> Une création CENTRAL-HEX</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+  </html>
